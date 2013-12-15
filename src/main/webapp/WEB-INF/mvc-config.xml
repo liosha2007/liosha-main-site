@@ -9,10 +9,24 @@
     <context:component-scan base-package="org.liosha.main.site"/>
     <mvc:annotation-driven />
 
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-	        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
-	        <property name="prefix" value="/WEB-INF/view/"/>
-	        <property name="suffix" value=".jsp"/>
-	</bean>
+    <!-- freemarker config -->
+    <bean id="freemarkerConfig"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/view/" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="locale">ru_RU</prop>
+                <prop key="number_format">0.####</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- View resolvers -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="false" />
+        <property name="prefix" value="_view" />
+        <property name="suffix" value=".ftl" />
+    </bean>
 
 </beans>

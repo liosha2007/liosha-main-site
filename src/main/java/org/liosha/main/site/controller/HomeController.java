@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,10 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Model model /* , @RequestParam("json") String json */) {
+    public String index(@ModelAttribute("model")ModelMap model /* , @RequestParam("name") String name */) {
 
-        model.addAttribute("message", "Hello to sample application!");
-        return "index";
+        model.addAttribute("message", "Hello to sample application with Freemarker!");
+        return "Home";
     }
 
     @RequestMapping(value = "/json-sample", method = RequestMethod.GET)
